@@ -1,4 +1,25 @@
 ﻿function Invoke-AzOpsChange {
+<#
+	.SYNOPSIS
+		Applies a change to Azure from the AzOps configuration.
+	
+	.DESCRIPTION
+		Applies a change to Azure from the AzOps configuration.
+	
+	.PARAMETER ChangeSet
+		Set of changes from the last execution that need to be applied.
+	
+	.PARAMETER StatePath
+		The root path to where the entire state is being built in.
+	
+	.PARAMETER AzOpsMainTemplate
+		Path to the main template used by AzOps
+	
+	.EXAMPLE
+		PS C:\> Invoke-AzOpsChange -ChangeSet changeSet -StatePath $StatePath -AzOpsMainTemplate $templatePath
+	
+		Applies a change to Azure from the AzOps configuration.
+#>
 	[CmdletBinding()]
 	param (
 		[Parameter(Mandatory = $true, ValueFromPipeline = $true)]
@@ -97,7 +118,7 @@
 				Write-PSFMessage -Level Warning -String 'Invoke-AzOpsChange.Resolve.MainTemplate.NotSupported' -StringValues $effectiveResourceType, $AzOpsMainTemplate.FullName -Tag pwsh -FunctionName 'Invoke-AzOpsChange' -Target $ScopeObject
 				return
 				#endregion Check in the main template file for a match
-				# All Code paths end the command	
+				# All Code paths end the command
 			}
 			#endregion Case: Parameters File
 			
